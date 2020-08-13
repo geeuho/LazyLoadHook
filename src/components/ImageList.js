@@ -9,7 +9,6 @@ const ImageList = (props) =>{
                     <Image alt = {image.description} key = {image.id} url={image.urls.regular}></Image>
                 )}
             </div>
-            
         )
 }
 
