@@ -1,30 +1,38 @@
-import React ,{useState, useEffect} from 'react'
+import React, {useState, useEffect} from 'react'
 
+let Image = (props) => {
+    const [ref, setRef] = useState(React.createRef())
+    const [spans, setSpans] = useState(0)
+    useEffect(() => {
 
-class Image extends React.Component {
-    constructor(props){
-        super(props)
-        this.imageRef = React.createRef()
-    }
-    componentDidMount(){
-        const selectedImage = this.imageRef.current
-        const options = {}
+        console.log(props)
+        const selectedImage = ref.current
+        const options = {
+            root: document.querySelector('root'),
+            rootMargin:'0px 0px 400px 0px',
+            threshold: 0
+        }
+        function imageRender(image) {
+            image.src = props.url
+        }
         const observer = new IntersectionObserver(function (entries, observer) {
-            entries.forEach(entry => {
-                console.log(entry)
-            })
+            let entry = entries[0]
+            if(!entry.isIntersecting){
+                return
+            } else {
+                imageRender(entry.target)
+                observer.unobserve(entry.target)
+            }
+            console.log(entry)
         }, options)
         observer.observe(selectedImage)
-    }
-    
-    render(){
-        return (
-            <div>
-                <img ref ={this.imageRef} src={this.props.url} alt={this.props.alt} />
-            </div>
-        )
+    }, [])
 
-    }
+    return (
+        <div style={{ gridRowEnd: `span ${spans}` }}>
+            <img style= {{height: `500px`}} id = {props.key} ref ={ref} alt={props.alt} />
+        </div>
+    )
 } 
 
 export default Image
