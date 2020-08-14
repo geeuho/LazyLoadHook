@@ -1,38 +1,48 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
+import defaultPic from '../public/default.jpg'
 
 let Image = (props) => {
-    const [ref, setRef] = useState(React.createRef())
-    const [spans, setSpans] = useState(0)
+    const [ref] = useState(React.createRef())
     useEffect(() => {
 
         console.log(props)
         const selectedImage = ref.current
         const options = {
-            root: document.querySelector('root'),
-            rootMargin:'0px 0px 400px 0px',
-            threshold: 0
+            root: null,
+            rootMargin: '100px',
+            threshold: 1
         }
         function imageRender(image) {
             image.src = props.url
+            image.classList.add('appear')
         }
         const observer = new IntersectionObserver(function (entries, observer) {
             let entry = entries[0]
-            if(!entry.isIntersecting){
+            if (!entry.isIntersecting) {
                 return
             } else {
                 imageRender(entry.target)
                 observer.unobserve(entry.target)
             }
-            console.log(entry)
+            console.log(entry.isIntersecting, props)
         }, options)
         observer.observe(selectedImage)
     }, [])
 
     return (
-        <div style={{ gridRowEnd: `span ${spans}` }}>
-            <img style= {{height: `500px`}} id = {props.key} ref ={ref} alt={props.alt} />
+        <div className='ui segment'>
+
+            <img className='ui centered image fade-in' ref={ref} alt={defaultPic} />
+            <p>Te eum doming eirmod, nominati pertinacia argumentum ad his. Ex eam alia facete scriptorem, est autem aliquip detraxit at. Usu ocurreret referrentur at, cu epicurei appellantur vix. Cum ea laoreet recteque electram, eos choro alterum definiebas in. Vim dolorum definiebas an. Mei ex natum rebum iisque.</p>
+            <p>Audiam quaerendum eu sea, pro omittam definiebas ex. Te est latine definitiones. Quot wisi nulla ex duo. Vis sint solet expetenda ne, his te phaedrum referrentur consectetuer. Id vix fabulas oporteat, ei quo vide phaedrum, vim vivendum maiestatis in.</p>
+            <p>Te eum doming eirmod, nominati pertinacia argumentum ad his. Ex eam alia facete scriptorem, est autem aliquip detraxit at. Usu ocurreret referrentur at, cu epicurei appellantur vix. Cum ea laoreet recteque electram, eos choro alterum definiebas in. Vim dolorum definiebas an. Mei ex natum rebum iisque.</p>
+            <p>Audiam quaerendum eu sea, pro omittam definiebas ex. Te est latine definitiones. Quot wisi nulla ex duo. Vis sint solet expetenda ne, his te phaedrum referrentur consectetuer. Id vix fabulas oporteat, ei quo vide phaedrum, vim vivendum maiestatis in.</p>
+            <p>Te eum doming eirmod, nominati pertinacia argumentum ad his. Ex eam alia facete scriptorem, est autem aliquip detraxit at. Usu ocurreret referrentur at, cu epicurei appellantur vix. Cum ea laoreet recteque electram, eos choro alterum definiebas in. Vim dolorum definiebas an. Mei ex natum rebum iisque.</p>
+            <p>Audiam quaerendum eu sea, pro omittam definiebas ex. Te est latine definitiones. Quot wisi nulla ex duo. Vis sint solet expetenda ne, his te phaedrum referrentur consectetuer. Id vix fabulas oporteat, ei quo vide phaedrum, vim vivendum maiestatis in.</p>
+           
+
         </div>
     )
-} 
+}
 
 export default Image

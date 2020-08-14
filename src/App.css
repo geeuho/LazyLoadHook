@@ -1,12 +1,11 @@
-.image-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 2fr));
-    grid-auto-rows: 10px;
-    grid-gap: 0 10px;
-    justify-content: center;
-
+.fade-in{
+  min-width: 1000px;
+  min-height: 1000px;
+  opacity: 0; 
 }
 
-.image-list img {
-    width: 250px;
+.fade-in.appear {
+  opacity: 1
 }
+
+

@@ -5,10 +5,10 @@ import SearchBar from './SearchBar'
 
 
 class App extends React.Component {
-  constructor(){
+  constructor() {
     super()
     this.state = {
-      images : []
+      images: []
     }
   }
 
@@ -18,15 +18,17 @@ class App extends React.Component {
         query: term
       }
     })
-    this.setState({images: response.data.results})
+    this.setState({ images: response.data.results })
     console.log(this.state.images)
   }
 
-  render(){
+  render() {
     return (
       <div className="App">
-        <SearchBar onSubmit = {this.onSubmit}/>
-        <ImageList images = {this.state.images}/>
+        <SearchBar onSubmit={this.onSubmit} />
+
+        <ImageList images={this.state.images} />
+
 
       </div>
     );
